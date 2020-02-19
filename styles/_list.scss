@@ -3,7 +3,8 @@ ol{
     
     li{
         padding: 5px;
-        
+        display: flex;
+        align-items: center;
         transition: .2s;
         &:hover{
             background-color: #eee;
@@ -13,6 +14,14 @@ ol{
         }
     }
 
+    input[type='checkbox']{
+        margin-left: 5px;
+    }
+
+    .buttongroup{
+        margin-left: auto;
+    }
+
     button.delete{
         padding: 2px;
         background-color: #fff;
@@ -20,13 +29,23 @@ ol{
         font-size: 15px;
         border: none;
         border-radius: 2px;
-        float: right;
-
+       
         transition: .2s;
         &:hover{
             background-color: $dangerBtnHover;
             color: red;
             cursor: pointer;
         }
+    }
+
+
+    button.edit{
+        @extend button.delete;
+        margin: 0 5px;
+        color: rgba(0,100,0, 0.7);
+        &:hover{
+            background-color: $dangerBtnHover;
+            color: green;
+         }
     }
 }

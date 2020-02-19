@@ -2,9 +2,18 @@ Vue.component('todo-item', {
     props: ['todo', 'index'],
     template: `
         <li>
-            {{ todo.text }}
+            <span v-if="!todo.edit">{{ todo.text }}</span>
+            
+            <form v-if="todo.edit" v-on:submit.prevent="handleSubmit(index)">
+                <input autofocus v-model="todo.text" type="text"></input>
+            </form>
+
             <input type="checkbox" v-model="todo.completed" v-on:change="markItem(index)" title="Marcar como concluído"/>
-            <button class="delete" v-on:click="deleteTodo(index)">deletar</button>
+            
+            <div class="buttongroup">
+                <button class="edit" v-on:click="(e) => editTodo(e, index)">editar</button>
+                <button class="delete" v-on:click="deleteTodo(index)">deletar</button>   
+            </div>
         </li>
     `,
     
@@ -16,6 +25,14 @@ Vue.component('todo-item', {
         markItem: function(idx){
             this.$root.todos[idx].marked = !this.$root.todos[idx].marked 
             this.$root.updateComplete()
+        },
+        editTodo: function(e, idx){
+            this.$root.todos[idx].edit = !this.$root.todos[idx].edit
+
+            e.target.innerHTML = this.$root.todos[idx].edit ? 'salvar' : 'editar'
+        },
+        handleSubmit: function(idx){
+            this.$root.todos[idx].edit = false
         }
     }
 })
@@ -27,9 +44,9 @@ var app = new Vue({
         newTodo: "",
         totalComplete: 0,
         todos: [
-            { text: 'Aprender Vue.Js', completed: false },
-            { text: 'Aprender SASS', completed: false},
-            { text: 'Integrar as duas coisas', completed: false }
+            { text: 'Aprender Vue.Js', edit: false},
+            { text: 'Aprender SASS', edit: false},
+            { text: 'Integrar as duas coisas', edit: false}
         ]
     },
 
@@ -40,7 +57,7 @@ var app = new Vue({
             if(this.newTodo === "")
                 alert("TODO não pode ser vazio")
             else{
-                this.todos.push({text: this.newTodo, completed: false})
+                this.todos.push({text: this.newTodo, edit: false})
                 this.newTodo = ""
                 this.updateComplete()
             }

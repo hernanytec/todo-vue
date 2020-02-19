@@ -18,7 +18,7 @@
 
         <p> {{totalComplete}}% concluído</p>
 
-        <form>
+        <form class="add">
             <input v-model="newTodo" type="text" placeholder="TODO">
             <button v-on:click="addTodo">Adicionar</button>
         </form>
@@ -32,7 +32,7 @@
             </todo-item>
         </ol>
 
-        <span v-if="todos.length === 0">Nenhum TODO adicionado!</span>
+        <span class="emptylist" v-if="todos.length === 0">Nenhum TODO adicionado!</span>
         
     </div>      
 

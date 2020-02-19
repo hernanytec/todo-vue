@@ -20,28 +20,28 @@
   margin-bottom: 10px;
 }
 
-#app span {
+#app span.emptylist {
   display: block;
   font-weight: bold;
   font-family: sans-serif;
   text-align: center;
 }
 
-form {
+form.add {
   margin-bottom: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-form input {
+form.add input {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   padding: 5px;
 }
 
-form button {
+form.add button {
   padding: 5px;
 }
 
@@ -51,6 +51,12 @@ ol {
 
 ol li {
   padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-transition: .2s;
   transition: .2s;
 }
@@ -59,25 +65,42 @@ ol li:hover {
   background-color: #eee;
 }
 
-ol li:hover button.delete {
+ol li:hover button.delete, ol li:hover button.edit {
   background-color: #aaa;
 }
 
-ol button.delete {
+ol input[type='checkbox'] {
+  margin-left: 5px;
+}
+
+ol .buttongroup {
+  margin-left: auto;
+}
+
+ol button.delete, ol button.edit {
   padding: 2px;
   background-color: #fff;
   color: brown;
   font-size: 15px;
   border: none;
   border-radius: 2px;
-  float: right;
   -webkit-transition: .2s;
   transition: .2s;
 }
 
-ol button.delete:hover {
+ol button.delete:hover, ol button.edit:hover {
   background-color: #aaa;
   color: red;
   cursor: pointer;
+}
+
+ol button.edit {
+  margin: 0 5px;
+  color: rgba(0, 100, 0, 0.7);
+}
+
+ol button.edit:hover {
+  background-color: #aaa;
+  color: green;
 }
 /*# sourceMappingURL=style.css.map */
