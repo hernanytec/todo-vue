@@ -23,8 +23,8 @@
             <button v-on:click="addTodo">Adicionar</button>
         </form>
 
-        <ol>
-            <todo-item
+        <ol >
+            <todo-item ref="todolist"
                 v-for="(todo, index) in todos"
                 v-bind:todo="todo"
                 v-bind:index="index"
