@@ -1,0 +1,32 @@
+ol{
+    list-style-type: none;
+    
+    li{
+        padding: 5px;
+        
+        transition: .2s;
+        &:hover{
+            background-color: #eee;
+            button.delete{
+                background-color: $dangerBtnHover;
+            }
+        }
+    }
+
+    button.delete{
+        padding: 2px;
+        background-color: #fff;
+        color: $dangerBtn;
+        font-size: 15px;
+        border: none;
+        border-radius: 2px;
+        float: right;
+
+        transition: .2s;
+        &:hover{
+            background-color: $dangerBtnHover;
+            color: red;
+            cursor: pointer;
+        }
+    }
+}

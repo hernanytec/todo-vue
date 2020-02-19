@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#app{
+    margin: 10px auto;
+    width: 50%;
+    background-color: #ccc;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.5);
+    border-radius: 5px;
+    padding: 30px;
+    
+    p{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    span{
+        display: block;
+        font-weight: bold;
+        font-family: sans-serif;
+        text-align: center;
+    }
+}
+
+@import './variables';
+@import './form';
+@import './list';

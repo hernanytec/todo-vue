@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TODO List</title>
+
+    <!-- versão de desenvolvimento, inclui avisos úteis no console  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--compiled sass link-->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    
+    <div id="app">
+
+        <p> {{totalComplete}}% concluído</p>
+
+        <form>
+            <input v-model="newTodo" type="text" placeholder="TODO">
+            <button v-on:click="addTodo">Adicionar</button>
+        </form>
+
+        <ol>
+            <todo-item
+                v-for="(todo, index) in todos"
+                v-bind:todo="todo"
+                v-bind:index="index"
+                v-bind:key="index">
+            </todo-item>
+        </ol>
+
+        <span v-if="todos.length === 0">Nenhum TODO adicionado!</span>
+        
+    </div>      
+
+    <script src="index.js"></script>
+</body>
+</html>
