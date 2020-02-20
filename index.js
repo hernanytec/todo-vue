@@ -1,3 +1,9 @@
+Vue.directive('focus', {
+    inserted: function (el) {
+        el.focus()
+    }
+})
+
 Vue.component('todo-item', {
     props: ['todo', 'index'],
     template: `
@@ -5,7 +11,7 @@ Vue.component('todo-item', {
             <span v-if="!todo.edit">{{ todo.text }}</span>
             
             <form v-if="todo.edit" v-on:submit.prevent="editTodo(index)">
-                <input autofocus v-model="todo.text" type="text"></input>
+                <input v-focus="todo.edit" v-model="todo.text" type="text"></input>
             </form>
 
             <input type="checkbox" v-model="todo.completed" v-on:change="markItem(index)" title="Marcar como concluído"/>
