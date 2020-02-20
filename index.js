@@ -4,69 +4,64 @@ Vue.component('todo-item', {
         <li>
             <span v-if="!todo.edit">{{ todo.text }}</span>
             
-            <form v-if="todo.edit" v-on:submit.prevent="handleSubmit(index)">
+            <form v-if="todo.edit" v-on:submit.prevent="editTodo(index)">
                 <input autofocus v-model="todo.text" type="text"></input>
             </form>
 
             <input type="checkbox" v-model="todo.completed" v-on:change="markItem(index)" title="Marcar como concluído"/>
             
             <div class="buttongroup">
-                <button class="edit" v-on:click="(e) => editTodo(e, index)">editar</button>
+                <button class="edit" v-on:click="editTodo(index)">{{todo.edit ? "salvar" : "editar"}}</button>
                 <button class="delete" v-on:click="deleteTodo(index)">deletar</button>   
             </div>
         </li>
     `,
-    
-    methods:{
-        deleteTodo: function(idx){
+
+    methods: {
+        deleteTodo: function (idx) {
             this.$root.todos.splice(idx, 1)
             this.$root.updateComplete()
         },
-        markItem: function(idx){
-            this.$root.todos[idx].marked = !this.$root.todos[idx].marked 
+        markItem: function (idx) {
+            this.$root.todos[idx].marked = !this.$root.todos[idx].marked
             this.$root.updateComplete()
         },
-        editTodo: function(e, idx){
+        editTodo: function (idx) {
             this.$root.todos[idx].edit = !this.$root.todos[idx].edit
-
-            e.target.innerHTML = this.$root.todos[idx].edit ? 'salvar' : 'editar'
-        },
-        handleSubmit: function(idx){
-            this.$root.todos[idx].edit = false
         }
     }
 })
 
 
-var app = new Vue({ 
+var app = new Vue({
     el: '#app',
     data: {
         newTodo: "",
         totalComplete: 0,
         todos: [
-            { text: 'Aprender Vue.Js', edit: false},
-            { text: 'Aprender SASS', edit: false},
-            { text: 'Integrar as duas coisas', edit: false}
+            { text: 'Aprender Vue.Js', edit: false },
+            { text: 'Aprender SASS', edit: false },
+            { text: 'Integrar as duas coisas', edit: false }
         ]
     },
 
-    methods:{
-        addTodo: function(e){
+    methods: {
+        addTodo: function (e) {
             e.preventDefault()
-            
-            if(this.newTodo === "")
+
+            if (this.newTodo === "")
                 alert("TODO não pode ser vazio")
-            else{
-                this.todos.push({text: this.newTodo, edit: false})
+            else {
+                this.todos.push({ text: this.newTodo, edit: false })
                 this.newTodo = ""
                 this.updateComplete()
             }
         },
-        updateComplete: function(){
+        updateComplete: function () {
             const size = this.todos.length
-            const marked = this.todos.filter((todo)=> todo.completed).length
-            
-            const total =  size === 0 ? 0 : parseFloat(marked / size * 100).toFixed(1)  
+            const marked = this.todos.filter((todo) => todo.completed).length
+
+            const total = size === 0 ? 0 : parseFloat(marked / size * 100).toFixed(1)
             this.$root.totalComplete = total
         }
     }
